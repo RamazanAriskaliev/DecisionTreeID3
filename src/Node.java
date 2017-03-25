@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by Ramazan on 20.03.2017.
@@ -13,7 +14,7 @@ public class Node{
     public Node parent;
 
     @XmlElement
-    public Node[] children;
+    public Map<String, Node> children;
 
     @XmlElement
     public LearningSet examples;
@@ -48,11 +49,11 @@ public class Node{
         this.parent = parent;
     }
 
-    public Node[] getChildren() {
+    public Map<String, Node> getChildren() {
         return children;
     }
 
-    public void setChildren(Node[] children) {
+    public void setChildren(Map<String, Node> children) {
         this.children = children;
     }
 
@@ -89,14 +90,15 @@ public class Node{
     }
 
 
-    public void print(int level) {
+    public void print(int level, String edgeName) {
         for (int i = 1; i < level; i++) {
             System.out.print("\t");
         }
-        System.out.println(atribute.getValue()+":"+atribute.getName());
+
+        System.out.println((edgeName.equals("")?"":edgeName+":")+atribute.getName()+ (atribute.getValue()==null? "" :(":"+ atribute.getValue())));
         if(children != null){
-            for (Node child : children) {
-                child.print(level + 1);
+            for (String edge : children.keySet()) {
+                children.get(edge).print(level + 1, edge);
             }
         }
 

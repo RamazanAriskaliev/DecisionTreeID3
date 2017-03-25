@@ -24,7 +24,10 @@ public class HelloWorld {
         Node root = new Node(examples);
         Tree tree = new Tree();
         tree.buildTree(root);
-        root.print(1);
+        root.print(1,"");
+
+        Gson g = new Gson();
+        System.out.println(g.toJson(root));
     }
 
 

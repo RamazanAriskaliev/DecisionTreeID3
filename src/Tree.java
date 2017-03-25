@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Ramazan on 20.03.2017.
@@ -12,31 +13,29 @@ public class Tree {
         if(root.getEntropy() == 0) {
             int lastIndex = examples.atributeMap.size()-1;
             ArrayList<String> items = (ArrayList<String>) examples.atributeMap.values().toArray()[lastIndex];
-            root.getAtribute().setName(items.get(0));
+            String targetItem = (String) examples.atributeMap.keySet().toArray()[lastIndex];
+            root.getAtribute().setValue(items.get(0));
+            root.getAtribute().setName(targetItem);
             return root;
         }
         int bestAttributeIndex = getBestAtribute(root);
         if(bestAttributeIndex != -1) {
-
             String atributeName = (String) examples.atributeMap.keySet().toArray()[bestAttributeIndex];
             int setSize = examples.atributeMap.get(atributeName).size();
-            if(root.getAtribute().getName().isEmpty()){
-                root.setAtribute(new Atribute(atributeName,atributeName));
-            } else {
-                root.getAtribute().setName(atributeName);
-            }
-            root.children = new Node[setSize];
+            ArrayList<String> edges = examples.atributeMap.get(atributeName);
+            root.setAtribute(new Atribute(atributeName));
+
+            root.children = new LinkedHashMap<>();
             root.setUsed(true);
             HelloWorld.usedAttributes.add(bestAttributeIndex);
             for (int j = 0; j< setSize; j++) {
-                root.children[j] = new Node(subset(root.getExamples(), bestAttributeIndex,j));
-                root.children[j].setParent(root);
-                String key = (String) examples.atributeMap.keySet().toArray()[bestAttributeIndex];
-                root.children[j].getAtribute().setName(examples.atributeMap.get(key).get(j));//possibleValues of beast attribute == leaf names
-                root.children[j].getAtribute().setValue(examples.atributeMap.get(key).get(j));//possibleValues of beast attribute == leaf names
+                String edge = edges.get(j);
+                Node childNode = new Node(subset(root.getExamples(), bestAttributeIndex,j));
+                childNode.setParent(root);
+                root.children.put(edge, childNode);
             }
             for (int j = 0; j < setSize; j++) {
-                buildTree(root.children[j]);
+                buildTree(root.children.get(edges.get(j)));
             }
             root.getExamples().setRecords(null);
         }

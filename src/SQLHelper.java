@@ -15,7 +15,7 @@ public class SQLHelper {
             if (conn != null) {
                 PlayStatistics playStatistics = null;
                 Statement statement = conn.createStatement();
-                String query = "select * from Category";
+                String query = "select * from Play";
                 ResultSet resultSet = statement.executeQuery(query);
                 /*ResultSetMetaData resultSetMetaData = resultSet.getMetaData();*/
 
