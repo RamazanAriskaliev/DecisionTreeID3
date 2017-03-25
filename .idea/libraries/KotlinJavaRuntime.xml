@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="KotlinJavaRuntime">
+    <CLASSES>
+      <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-runtime.jar!/" />
+      <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-reflect.jar!/" />
+      <root url="jar://C:/Program Files/Microsoft JDBC DRIVER 6.0 для SQL Server/sqljdbc_6.0/rus/jre8/sqljdbc42.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://C:/Program Files/Microsoft JDBC DRIVER 6.0 для SQL Server/sqljdbc_6.0/rus/auth/x64" />
+      <root url="file://C:/Program Files/Microsoft JDBC DRIVER 6.0 для SQL Server/sqljdbc_6.0/rus/auth/x86" />
+    </NATIVE>
+    <SOURCES>
+      <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-runtime-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
